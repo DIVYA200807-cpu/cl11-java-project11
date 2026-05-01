@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Async & Await with JSON</h2>
+    <button onclick="displayUser()">Get User Data</button>
+    
+    <p id="output"></p>
+    
+    <script>
+        // Asynchronous function returning JSON data
+        async function fetchUser() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    let user = {
+                        name: "Divya",
+                        age: 20,
+                        city: "Delhi"
+                    };
+                    resolve(user);
+                }, 2000); // simulate delay
+            });
+        }
+
+        // Function dependent on async result
+        async function displayUser() {
+            try {
+                let userData = await fetchUser(); // wait for result
+
+                document.getElementById("output").innerHTML =
+                    "Name: " + userData.name + "<br>" +
+                    "Age: " + userData.age + "<br>" +
+                    "City: " + userData.city;
+
+            } catch (error) {
+                document.getElementById("output").innerHTML =
+                    "Error: " + error;
+            }
+        }
+    </script>
+
+</body>
+</html>
